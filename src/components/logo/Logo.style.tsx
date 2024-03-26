@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
-const Styled = styled.svg`
+const Styled = styled.svg<{ height: number }>`
   svg {
-    height: ${props => props.height};
+    height: ${(props) => props.height};
   }
 
   path,
