@@ -27,7 +27,7 @@ const persistedReducer = persistReducer(persistConfig, reducer)
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (defaultMiddleware) =>
-    defaultMiddleware({ thunk: false }).concat(logger),
+    defaultMiddleware({ thunk: false }).concat(),
 })
 
 export type AppState = ReturnType<typeof reducer>
