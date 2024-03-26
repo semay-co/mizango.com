@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  # web-prod:
+  #   build:
+  #     context: "./"
+  #     dockerfile: Dockerfile.prod
+  #   environment:
+  #     APP_ENV: production
+  #   volumes:
+  #     - "./src:/app/src"
+  #   ports:
+  #     - "3000:3000"
+
+  couchdb:
+    container_name: mizan-couchdb
+    image: 'couchdb:3.2'
+    ports:
+        - '5984:5984'
+    environment:
+        - COUCHDB_USER=admin
+        - COUCHDB_PASSWORD=password
