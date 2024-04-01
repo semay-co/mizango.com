@@ -43,8 +43,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const username = process.env.DB_USERNAME
   const password = process.env.DB_PASSWORD
+  const dbUrl = process.env.DB_URL
 
-  const url = `http://${username}:${password}@159.223.1.144:5984/records/_find`
+  const url = `http://${username}:${password}@${dbUrl}/records/_find`
 
   const config = {
     method: 'post',
