@@ -31,9 +31,13 @@ const Report = () => {
   const rawData = report?.docs || []
 
   const data = useMemo(() => {
-
     const newData = rawData.map((item: any) => {
-      const prices =item.createdAt < 1680555600000 ? [80, 100, 150, 200, 250] : [100, 150, 200, 250, 350]
+      const prices =
+        item.createdAt < 1680555600000
+          ? [80, 100, 150, 200, 250]
+          : item.createdAt < 1728864000000
+          ? [100, 150, 200, 250, 350]
+          : [100, 200, 250, 300, 500]
 
       const plate = item.dataCache.vehicle.licensePlate
       const w1 = item.weights[0]?.weight
@@ -46,7 +50,7 @@ const Report = () => {
         plate: `(${plate.code}) ${plate.plate} [${plate.region?.code}]`,
         price: prices[item.dataCache.vehicle.type],
         //weights: `${w1} KG ${w}`
-	weights: item.weights
+        weights: item.weights,
       }
     })
 
@@ -112,17 +116,24 @@ const Report = () => {
       {
         Header: 'Weights',
         accessor: 'weights',
-        Cell: ( {value} : any) => {
-          return  <ul className='weights-list'>
-
-	    <li className={`${value?.[0]?.manual ? 'manual-input' : ''}`}>{value?.[0]?.weight}</li>
-	    { value?.[1] ?
-            <>
-	      <li className={`${value?.[1]?.manual ? 'manual-input' : ''}`}>{value?.[1]?.weight}</li>
-	      <li>{Math.abs(value[0].weight - value[1].weight)}</li>
-            </> : <></>
-	    }
-          </ul>
+        Cell: ({ value }: any) => {
+          return (
+            <ul className='weights-list'>
+              <li className={`${value?.[0]?.manual ? 'manual-input' : ''}`}>
+                {value?.[0]?.weight}
+              </li>
+              {value?.[1] ? (
+                <>
+                  <li className={`${value?.[1]?.manual ? 'manual-input' : ''}`}>
+                    {value?.[1]?.weight}
+                  </li>
+                  <li>{Math.abs(value[0].weight - value[1].weight)}</li>
+                </>
+              ) : (
+                <></>
+              )}
+            </ul>
+          )
         },
       },
       {
