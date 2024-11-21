@@ -339,12 +339,38 @@ const AnalyticsContent = ({
 
         <ChartContainer
           config={chartConfig}
-          className='mx-auto max-h-[300px] aspect-square'
+          className='mx-auto max-h-[400px] aspect-square'
         >
           <PieChart>
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent className='w-[200px]' hideLabel />}
+              content={
+                <ChartTooltipContent
+                  formatter={(val, name, x) => (
+                    <span className='flex justify-between items-center gap-2 w-full'>
+                      <span
+                        className={`rounded-sm aspect-square w-3 h-3 bg-[${x.payload.fill}] `}
+                        style={{
+                          backgroundColor: x.payload.fill,
+                        }}
+                      />
+                      <div className='font-bold'>{name}</div>
+                      <span className='text-end'>
+                        {val.toLocaleString() +
+                          ' (' +
+                          (
+                            (+val /
+                              byVehicle.reduce((a, c) => (a += c.revenue), 0)) *
+                            100
+                          ).toFixed(1) +
+                          '%)'}
+                      </span>
+                    </span>
+                  )}
+                  className='max-w-[400px]'
+                  hideLabel
+                />
+              }
             />
             <Pie
               data={byVehicle}
