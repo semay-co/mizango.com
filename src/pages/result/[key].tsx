@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import Result from '@app/components/result'
-import { MainLayout } from '@app/layout/Main'
+import Result from '@/components/result'
+import MainLayout from '@/layout/main'
+import Loading from '@/components/loading'
 
 const ResultPage = () => {
   const router = useRouter()
@@ -27,7 +28,13 @@ const ResultPage = () => {
 
   return (
     <MainLayout>
-      {loading ? <div>Loading...</div> : <Result data={data} />}
+      {loading ? (
+        <div>
+          <Loading />
+        </div>
+      ) : (
+        <Result data={data} />
+      )}
     </MainLayout>
   )
 }

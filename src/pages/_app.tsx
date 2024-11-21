@@ -1,7 +1,8 @@
 import type { AppProps } from 'next/app'
-import AppProvider from '@app/providers/app'
+import AppProvider from '@/providers/app'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import '../styles/globals.css'
 
 import * as ga from '../lib/ga'
 

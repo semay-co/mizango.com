@@ -1,5 +1,5 @@
 import moment from 'moment'
-import LicensePlate from '@app/components/licensePlate'
+import LicensePlate from '@/components/licensePlate'
 import Style from './style'
 
 interface ResultProps {
@@ -53,7 +53,7 @@ const Result = ({ data }: ResultProps) => {
                           +data.weights[0]?.createdAt
                         )}
                       </div>
-                      <div className='weight-value weight-result'>
+                      <div className='weight-result weight-value'>
                         {`${Math.abs(
                           +data.weights[1].weight - +data.weights[0].weight
                         )} KG`}

@@ -1,4 +1,4 @@
-import api from '@app/state/api'
+import api from '@/state/api'
 import { ApiProvider } from '@reduxjs/toolkit/dist/query/react'
 import { SessionProvider } from 'next-auth/react'
 import { ReactNode } from 'react'

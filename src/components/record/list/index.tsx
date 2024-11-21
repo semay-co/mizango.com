@@ -1,9 +1,11 @@
-import api from '@app/state/api'
+import api from '@/state/api'
 import moment from 'moment'
 import { useEffect, useMemo, useState } from 'react'
 import { useFlexLayout, usePagination, useTable } from 'react-table'
 import Styled from './style'
-import Datepicker from '@app/components/datepicker'
+import Datepicker from '@/components/datepicker'
+import { Oval } from 'react-loader-spinner'
+import Loading from '@/components/loading'
 
 const Records = () => {
   const [startDate, setStartDate] = useState(
@@ -169,7 +171,9 @@ const Records = () => {
   return (
     <Styled>
       {isLoading ? (
-        <div>Loading...</div>
+        <div>
+          <Loading />
+        </div>
       ) : error && (error as any).status !== 404 ? (
         <div>Error: {JSON.stringify(error)}</div>
       ) : (

@@ -1,9 +1,10 @@
-import api from '@app/state/api'
+import api from '@/state/api'
 import moment from 'moment'
 import { useEffect, useMemo, useState } from 'react'
 import { useFlexLayout, useTable } from 'react-table'
 import Styled from './style'
-import Datepicker from '@app/components/datepicker'
+import Datepicker from '@/components/datepicker'
+import Loading from '../loading'
 
 const Report = () => {
   const [startDate, setStartDate] = useState(
@@ -179,7 +180,9 @@ const Report = () => {
   return (
     <Styled>
       {isLoading ? (
-        <div>Loading...</div>
+        <div>
+          <Loading />
+        </div>
       ) : error && (error as any).status !== 404 ? (
         <div>Error: {JSON.stringify(error)}</div>
       ) : (

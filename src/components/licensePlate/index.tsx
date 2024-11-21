@@ -1,8 +1,8 @@
-import { LicensePlate } from '@app/interfaces/LicensePlate.interface'
+import { LicensePlate as LicensePlateInterface } from '@/interfaces/LicensePlate.interface'
 import Style from './style'
 
 interface LicensePlateProps {
-  licensePlate: LicensePlate
+  licensePlate: LicensePlateInterface
 }
 
 const LicensePlate = ({ licensePlate }: LicensePlateProps) => {

@@ -47,6 +47,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const url = `http://${username}:${password}@${dbUrl}/records/_find`
 
+  console.log({ url })
+
   const config = {
     method: 'post',
     url,

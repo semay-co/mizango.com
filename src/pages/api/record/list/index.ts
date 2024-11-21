@@ -40,6 +40,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const url = `http://${username}:${password}@${dbUrl}/records/_find`
   const count = `http://${username}:${password}@1${dbUrl}/records/_count`
 
+  console.log({ url })
+
   const config = {
     method: 'post',
     url,
