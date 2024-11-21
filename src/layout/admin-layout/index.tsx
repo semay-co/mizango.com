@@ -20,6 +20,8 @@ import { CenterLayout } from '../../components/center-layout'
 import { useEffect } from 'react'
 import router from 'next/router'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { MenuIcon } from 'lucide-react'
+import { FaChartLine, FaList } from 'react-icons/fa'
 
 interface Props {
   children: React.ReactNode
@@ -71,19 +73,21 @@ const AdminLayout = ({ children }: Props) => {
         <SidebarContent className='p-0'>
           <SidebarGroup className='p-0'>
             <Link
-              className={`py-3 px-4 uppercase ${
+              className={`py-4 px-4 flex gap-3 items-center uppercase ${
                 path === '/admin' ? 'bg-black' : ''
               }`}
               href={'/admin'}
             >
+              <FaChartLine />
               Dashboard
             </Link>
             <Link
-              className={`py-3 px-4 uppercase ${
+              className={`py-4 px-4 flex gap-3 items-center uppercase ${
                 path === '/admin/records' ? 'bg-black' : ''
               }`}
               href={'/admin/records'}
             >
+              <FaList />
               Records
             </Link>
           </SidebarGroup>
@@ -95,7 +99,10 @@ const AdminLayout = ({ children }: Props) => {
         </SidebarFooter>
       </Sidebar>
       <div className='px-3 w-full'>
-        <SidebarTrigger />
+        <SidebarTrigger className='flex items-center gap-3 mt-2 text-lg'>
+          <MenuIcon size={30} />
+          <span className='text-slate-400 text-sm'>MENU</span>
+        </SidebarTrigger>
         {children}
       </div>
     </SidebarProvider>

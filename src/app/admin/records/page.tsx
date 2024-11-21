@@ -50,12 +50,12 @@ const RecordsTable = ({ data }: { data: any[] }) => {
 
   return (
     <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
+      <TableCaption>Records List</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className='w-[100px]'>Record</TableHead>
           <TableHead className='text-end'>Weights</TableHead>
-          <TableHead className='text-end'>Amount</TableHead>
+          <TableHead className='text-end'>Price</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -71,7 +71,7 @@ const RecordsTable = ({ data }: { data: any[] }) => {
             }`}
           >
             <TableCell className='font-medium'>
-              <div className='pb-2 uppercase'>Serial: {item.serial}</div>
+              <div className='pb-2 uppercase'>{item.serial}</div>
 
               <LicensePlate
                 type='simple'
@@ -95,7 +95,7 @@ const RecordsTable = ({ data }: { data: any[] }) => {
             </TableCell>
             <TableCell className='text-end'>
               <div className='text-slate-500 text-sm'>
-                {moment(item.createdAt).format('hh:MM A')}
+                {moment(item.createdAt).format('hh:mm A')}
               </div>
               <div
                 className={`${item.weights[0].manual ? 'text-yellow-400' : ''}`}
