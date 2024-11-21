@@ -1,4 +1,4 @@
-import MainLayout from '@/layout/main'
+import MainLayout from '@/layout/main-layout'
 import type { NextPage } from 'next'
 
 const AboutPage: NextPage = () => {

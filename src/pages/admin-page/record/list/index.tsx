@@ -1,5 +1,5 @@
 import Records from '@/components/record/list'
-import AdminLayout from '@/layout/admin'
+import AdminLayout from '@/layout/admin-layout'
 
 const ReportPage = () => {
   return (

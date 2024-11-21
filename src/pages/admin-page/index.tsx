@@ -1,5 +1,5 @@
 import Report from '@/components/report'
-import AdminLayout from '@/layout/admin'
+import AdminLayout from '@/layout/admin-layout'
 import Link from 'next/link'
 
 const ReportPage = () => {

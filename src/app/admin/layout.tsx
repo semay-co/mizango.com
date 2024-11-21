@@ -1,4 +1,4 @@
-import AdminLayout from '@/layout/admin'
+import AdminLayout from '@/layout/admin-layout'
 import AuthProvider from '@/providers/auth'
 import '@/styles/globals.css'
 

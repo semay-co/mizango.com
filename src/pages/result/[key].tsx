@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Result from '@/components/result'
-import MainLayout from '@/layout/main'
+import MainLayout from '@/layout/main-layout'
 import Loading from '@/components/loading'
 
 const ResultPage = () => {
