@@ -2,7 +2,7 @@ import { LicensePlate as LicensePlateInterface } from '@/interfaces/LicensePlate
 
 interface LicensePlateProps {
   licensePlate: LicensePlateInterface
-  type: 'simple' | 'outline' | 'color'
+  type?: 'simple' | 'outline' | 'color'
 }
 
 const LicensePlate = ({
