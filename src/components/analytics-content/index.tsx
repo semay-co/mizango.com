@@ -27,6 +27,7 @@ import { useQuery } from '@tanstack/react-query'
 import { api } from '@/api'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import moment from 'moment'
+import { vehicleColors, vehicleTypes } from '@/lib/vehicle'
 
 const chartConfig = {
   revenue: {
@@ -42,22 +43,6 @@ const chartConfig = {
   //   color: 'hsl(var(--chart-2))',
   // },
 } satisfies ChartConfig
-
-const colors = [
-  'hsl(var(--chart-1))',
-  'hsl(var(--chart-2))',
-  'hsl(var(--chart-3))',
-  'hsl(var(--chart-4))',
-  'hsl(var(--chart-5))',
-]
-
-const vehicleTypes = [
-  'Small Vehicle',
-  'Light Truck',
-  'Medium Truck',
-  'Large Truck',
-  'Trailer Truck',
-]
 
 const typePrice = [100, 200, 250, 300, 500]
 
@@ -215,7 +200,7 @@ const AnalyticsContent = ({
       c.recordsAndRevenue.forEach((recRev: [number, number], i: number) => {
         a[i] = {
           type: i,
-          fill: colors[i],
+          fill: vehicleColors[i],
           name: vehicleTypes[i],
           records: (a[i]?.records || 0) + recRev[0],
           revenue: (a[i]?.revenue || 0) + recRev[1],
@@ -337,7 +322,7 @@ const AnalyticsContent = ({
                     stackId={'records'}
                     dataKey={`records${i}`}
                     name={vehicleTypes[i]}
-                    fill={colors[i]}
+                    fill={vehicleColors[i]}
                   />
                 ))
               : typePrice.map((_, i) => (
@@ -346,7 +331,7 @@ const AnalyticsContent = ({
                     stackId={'revenue'}
                     dataKey={`revenue${i}`}
                     name={vehicleTypes[i]}
-                    fill={colors[i]}
+                    fill={vehicleColors[i]}
                   />
                 ))}
           </BarChart>

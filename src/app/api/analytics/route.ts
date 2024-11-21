@@ -1,19 +1,12 @@
 import moment from 'moment'
 import { NextRequest, NextResponse } from 'next/server'
 import nano from 'nano'
+import { getVehiclePrices } from '@/lib/vehicle'
 
 const username = process.env.DB_USERNAME
 const password = process.env.DB_PASSWORD
 const dbUrl = process.env.DB_URL
 const db = `http://${username}:${password}@${dbUrl}`
-
-const getPrices = (time: number) => {
-  return time < 1680555600000
-    ? [80, 100, 150, 200, 250]
-    : time < 1728864000000
-    ? [100, 150, 200, 250, 350]
-    : [100, 200, 250, 300, 500]
-}
 
 const reducer = (docs: any[]) => {
   const vehicleIds: string[] = []
@@ -22,7 +15,7 @@ const reducer = (docs: any[]) => {
       const vehicle = c.dataCache?.vehicle
 
       const size = vehicle.type
-      const prices = getPrices(c.createdAt)
+      const prices = getVehiclePrices(c.createdAt)
 
       const rnr = a.recordsAndRevenue
 

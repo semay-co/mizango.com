@@ -3,7 +3,6 @@
 import { Calendar } from '@/components/ui/calendar'
 import { useMemo, useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import {
   Popover,
@@ -15,13 +14,6 @@ import { Button } from '@/components/ui/button'
 import moment from 'moment'
 import AnalyticsContent from '@/components/analytics-content'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
-import { Select } from '@/components/ui/select'
-import {
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-} from '@radix-ui/react-select'
-import { Label } from '@/components/ui/label'
 
 const Admin = () => {
   const [customDate, setCustomDate] = useState({

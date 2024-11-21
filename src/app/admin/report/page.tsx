@@ -1,12 +1,9 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 
 const Report = () => {
-  const router = useRouter()
-
-  router.push('/admin')
-  return <div>Report page tbd</div>
+  redirect('/admin/records')
 }
 
 export default Report
