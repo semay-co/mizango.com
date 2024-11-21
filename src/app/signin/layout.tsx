@@ -22,9 +22,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  return (
-    <SessionProvider>
-      <SignedOutLayout>{children}</SignedOutLayout>
-    </SessionProvider>
-  )
+  return <SignedOutLayout>{children}</SignedOutLayout>
 }

@@ -1,47 +1,33 @@
 'use client'
 
+import { CenterLayout } from '@/components/center-layout'
 import Loading from '@/components/loading'
 import Logo from '@/components/logo'
 import { signOut, useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 
 interface Props {
   children: React.ReactNode
 }
 
 const SignedOutLayout = ({ children }: Props) => {
-  const { data, status } = useSession()
-  const router = useRouter()
+  const { status } = useSession()
 
   if (status === 'loading') {
     return (
-      <div className='fixed justify-center items-center grid w-full h-full'>
+      <CenterLayout>
         <Loading />
-      </div>
+      </CenterLayout>
     )
   }
 
   if (status === 'authenticated') {
-    router.push('/admin')
-    return (
-      <div className='fixed justify-center items-center grid w-full h-full'>
-        <Loading />
-      </div>
-    )
+    redirect('/admin')
   }
 
   return (
     <div>
-      <div className='header'>
-        <div>
-          <Logo height={20} />
-        </div>
-        <div className='account-info'>
-          <span>{(data as any)?.user?.name}</span>
-          <button onClick={() => signOut()}>Sign Out</button>
-        </div>
-      </div>
-      <div>{children}</div>
+      <CenterLayout>{children}</CenterLayout>
     </div>
   )
 }

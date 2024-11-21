@@ -7,8 +7,17 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     strategy: 'jwt',
   },
   pages: {
-    signIn: '/admin/signin',
-    error: '/admin/signin',
+    signIn: '/signin',
+    error: '/signin',
+  },
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      // Redirect to /admin after signing in
+      if (url.startsWith('/admin')) {
+        return new URL(url, baseUrl).toString()
+      }
+      return `${baseUrl}/admin`
+    },
   },
   providers: [
     CredentialsProvider({

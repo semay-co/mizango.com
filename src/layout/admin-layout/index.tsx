@@ -15,7 +15,11 @@ import {
 import { Avatar } from '@radix-ui/react-avatar'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname, redirect } from 'next/navigation'
+import { CenterLayout } from '../../components/center-layout'
+import { useEffect } from 'react'
+import router from 'next/router'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
 interface Props {
   children: React.ReactNode
@@ -23,23 +27,36 @@ interface Props {
 
 const AdminLayout = ({ children }: Props) => {
   const { data, status } = useSession()
-  const router = useRouter()
   const path = usePathname()
 
   if (status === 'loading') {
     return (
-      <div className='fixed justify-center items-center grid w-full h-full'>
+      <CenterLayout>
         <Loading />
-      </div>
+      </CenterLayout>
     )
   }
 
   if (status === 'unauthenticated') {
-    router.push('/signin')
     return (
-      <div className='fixed justify-center items-center grid w-full h-full'>
-        <span>UNAUTHENTICATED!</span>
-      </div>
+      <CenterLayout>
+        <Card>
+          <CardHeader className='flex justify-center'>
+            <Logo height={40} />
+          </CardHeader>
+          <CardContent>
+            <h2 className='mb-3 py-4 text-center uppercase'>Signed Out</h2>
+            <div className='flex justify-stretch'>
+              <Link
+                className='border-gray-600 px-4 py-2 border rounded-md w-full font-bold text-center'
+                href={'/signin'}
+              >
+                Sign In
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+      </CenterLayout>
     )
   }
 
