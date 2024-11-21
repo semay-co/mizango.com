@@ -171,7 +171,7 @@ const Admin = () => {
                 setMonthStart(moment().subtract(1, 'month').valueOf())
               }}
             >
-              Full
+              Full Month
             </Button>
           </div>
           <div className='mt-2 mb-2 text-2xl'>
