@@ -53,43 +53,6 @@ const reducer = (docs: any[]) => {
         }
       }
 
-      // console.log({ rnr, vehicles })
-      // console.log(a)
-      /*
-      const revenueBVT = a.revenue.byVehicleType
-      const recordBVT = a.records.byVehicleType
-      const mistakeBVT = a.mistakes.byVehicleType
-      const unpaidBVT = a.unpaid.byVehicleType
-
-
-      if (vehicleIds.includes(c.vehicleId)) {
-      } else {
-        vehicleIds.push(c.vehicleId)
-        vehicleBVT[size]++
-        vehicleT++
-      }
-
-      if (c.isMistake) {
-        mistakeBVT[size]++
-      } else {
-        recordBVT[size]++
-        revenueBVT[size] += prices[size]
-      }
-
-      const revenueT = c.isMistake
-        ? a.revenue.total
-        : a.revenue.total + prices[size]
-
-      unpaidBVT[size] = c.isUnpaid ? unpaidBVT[size] + 1 : unpaidBVT[size]
-
-      const recordT = c.isMistake ? a.records.total : a.records.total + 1
-      const unpaidT = c.isUnpaid ? a.unpaid.total + 1 : a.unpaid.total
-      const mistakeT = c.isMistake ? a.mistakes.total + 1 : a.mistakes.total
-
-
-        
-      */
-
       return {
         recordsAndRevenue: rnr,
         vehicles,

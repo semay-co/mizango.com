@@ -308,7 +308,7 @@ const AnalyticsContent = ({
             <ChartTooltip
               content={
                 <ChartTooltipContent
-                  className='w-[150px]'
+                  className='w-[200px]'
                   nameKey='view'
                   labelFormatter={(v) => {
                     const data = tickData.find((h) => h.tick === v)
@@ -354,18 +354,18 @@ const AnalyticsContent = ({
 
         <ChartContainer
           config={chartConfig}
-          className='mx-auto max-h-[250px] aspect-square'
+          className='mx-auto max-h-[300px] aspect-square'
         >
           <PieChart>
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent hideLabel />}
+              content={<ChartTooltipContent className='w-[200px]' hideLabel />}
             />
             <Pie
               data={byVehicle}
               dataKey={activeChart}
               nameKey='name'
-              innerRadius={70}
+              innerRadius={80}
               strokeWidth={5}
             >
               <Label

@@ -1,7 +1,7 @@
 'use client'
 
 import { Calendar } from '@/components/ui/calendar'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
@@ -13,11 +13,24 @@ import {
 import { CalendarIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import moment from 'moment'
-import AnalyticsContent from '@/components/charts-daily'
+import AnalyticsContent from '@/components/analytics-content'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { Select } from '@/components/ui/select'
+import {
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from '@radix-ui/react-select'
+import { Label } from '@/components/ui/label'
 
 const Admin = () => {
-  const [date, setDate] = useState(null)
+  const [customDate, setCustomDate] = useState({
+    from: new Date(moment().subtract(2, 'weeks').startOf('day').toDate()),
+    to: new Date(moment().endOf('day').toDate()),
+  })
+  const [customTick, setCustomTick] = useState(
+    'day-month-year' as 'day-month-year' | 'month'
+  )
   const [dailyDate, setDailyDate] = useState(
     new Date(moment().startOf('day').toDate())
   )
@@ -39,6 +52,14 @@ const Admin = () => {
     moment().startOf('month').valueOf()
   )
   const [yearStart, setYearStart] = useState(moment().startOf('year').valueOf())
+
+  const yearEnd = useMemo(
+    () =>
+      moment().isAfter(moment(yearStart).add(1, 'year'))
+        ? moment(yearStart).add(1, 'year')
+        : moment().endOf('day'),
+    [yearStart]
+  )
 
   return (
     <>
@@ -67,10 +88,6 @@ const Admin = () => {
                 <span>Select Date</span>
               </Button>
             </PopoverTrigger>
-            <span className='ml-3 text-2xl'>
-              {dailyDate &&
-                moment(dailyDate).startOf('day').format('ddd, MMM DD, YYYY')}
-            </span>
             <PopoverContent className='z-50 bg-black p-0 w-auto' align='start'>
               <Calendar
                 mode='single'
@@ -83,6 +100,10 @@ const Admin = () => {
               />
             </PopoverContent>
           </Popover>
+
+          <div className='mt-2 mb-2 text-2xl'>
+            {moment(dailyDate).format('MMM DD, YYYY')}
+          </div>
           <AnalyticsContent
             start={moment(dailyDate).startOf('day').valueOf().toString()}
             end={moment(dailyDate).endOf('day').valueOf().toString()}
@@ -225,24 +246,62 @@ const Admin = () => {
           </div>
           <div className='mt-2 mb-2 text-2xl'>
             From {moment(yearStart).format('MMM DD, YYYY')} —&nbsp;
-            {moment(yearStart).add(1, 'year').format('MMM DD, YYYY')}
+            {moment(yearEnd).format('MMM DD, YYYY')}
           </div>
           <AnalyticsContent
             start={moment(yearStart).valueOf().toString()}
-            end={moment(yearStart).add(1, 'year').valueOf().toString()}
+            end={moment(yearEnd).valueOf().toString()}
             tickType='month'
           />
         </TabsContent>
         <TabsContent value='custom'>
-          <Card>
-            <Calendar
-              numberOfMonths={2}
-              mode='range'
-              selected={date}
-              onSelect={setDate}
-              className='shadow border rounded-md'
-            />
-          </Card>
+          <div>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={'default'}
+                  className={cn(
+                    'mt-2 p-4 text-left font-normal',
+                    !dailyDate && 'text-muted-foreground'
+                  )}
+                >
+                  <CalendarIcon className='opacity-50 ml-auto w-4 h-4' />
+
+                  <span>Select Date Range</span>
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent
+                className='z-50 bg-black p-0 w-auto'
+                align='start'
+              >
+                <Calendar
+                  numberOfMonths={2}
+                  mode='range'
+                  selected={customDate}
+                  onSelect={(v: any) => setCustomDate(v)}
+                  disabled={(date: any) => date > new Date()}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
+          </div>
+
+          <div className='mt-2 mb-2 text-2xl'>
+            From {moment(customDate.from).format('MMM DD, YYYY')} —&nbsp;
+            {moment(customDate.to).format('MMM DD, YYYY')}
+          </div>
+
+          <AnalyticsContent
+            start={moment(customDate?.from || moment())
+              .startOf('day')
+              .valueOf()
+              .toString()}
+            end={moment(customDate?.to || moment())
+              .endOf('day')
+              .valueOf()
+              .toString()}
+            tickType={customTick}
+          />
         </TabsContent>
       </Tabs>
     </>
