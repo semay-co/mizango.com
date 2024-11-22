@@ -111,8 +111,8 @@ const RecordsTable = ({ data }: { data: any[] }) => {
                   >
                     {item.weights[1].weight} KG
                   </div>
-                  <div>
-                    {Math.abs(item.weights[0].weight - item.weights[1].weight)}{' '}
+                  <div className='mb-1 font-bold text-lg'>
+                    {Math.abs(item.weights[0].weight - item.weights[1].weight)}
                     KG
                   </div>
                 </>

@@ -346,12 +346,12 @@ const AnalyticsContent = ({
               cursor={false}
               content={
                 <ChartTooltipContent
-                  formatter={(val, name, x) => (
+                  formatter={(val, name, item) => (
                     <span className='flex justify-between items-center gap-2 w-full'>
                       <span
-                        className={`rounded-sm aspect-square w-3 h-3 bg-[${x.payload.fill}] `}
+                        className={`rounded-xs aspect-square w-3 h-3 bg-[${item.payload.fill}] `}
                         style={{
-                          backgroundColor: x.payload.fill,
+                          backgroundColor: item.payload.fill,
                         }}
                       />
                       <div className='font-bold'>{name}</div>
@@ -360,7 +360,10 @@ const AnalyticsContent = ({
                           ' (' +
                           (
                             (+val /
-                              byVehicle.reduce((a, c) => (a += c.revenue), 0)) *
+                              byVehicle.reduce(
+                                (a, c) => (a += c[activeChart]),
+                                0
+                              )) *
                             100
                           ).toFixed(1) +
                           '%)'}
