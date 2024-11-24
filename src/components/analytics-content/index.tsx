@@ -381,6 +381,11 @@ const AnalyticsContent = ({
               nameKey='name'
               innerRadius={80}
               strokeWidth={5}
+              startAngle={90}
+              endAngle={-270}
+              cx='50%'
+              cy='50%'
+              animationDuration={800}
             >
               <Label
                 content={({ viewBox }) => {
