@@ -15,6 +15,12 @@ import moment from 'moment'
 import AnalyticsContent from '@/components/analytics-content'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
+moment.updateLocale('en', {
+  week: {
+    dow: 1,
+  },
+})
+
 const Admin = () => {
   const [customDate, setCustomDate] = useState({
     from: new Date(moment().subtract(2, 'weeks').startOf('day').toDate()),
